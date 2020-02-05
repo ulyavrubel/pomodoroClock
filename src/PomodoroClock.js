@@ -6,10 +6,15 @@ function PomodoroClock() {
   const [timeLeft, setTimeLeft] = useState(null);
   const [running, setRunning] = useState(false);
   const [timer, setTimer] = useState(null);
+  const [text, setText] = useState("Session");
+  const [changeToBreak, setChangeToBreak] = useState(true);
 
   function reset() {
     setBreakLength(5);
     setSessionLength(25);
+    let beep = document.getElementById("beep");
+    beep.pause();
+    beep.currentTime = 0;
   }
 
   function breakDecrement() {
@@ -57,6 +62,31 @@ function PomodoroClock() {
     setRunning(prevRunning => !prevRunning);
   }
 
+  function changeTimer(base, text) {
+    setTimeLeft(timerString(base));
+    setTimer(
+      setInterval(() => {
+        setTimeLeft(prevTimeLeft => {
+          return timerStringDecrement(prevTimeLeft);
+        });
+      }, 1000)
+    );
+    setText(text);
+    setChangeToBreak(prevChangetoBreak => !prevChangetoBreak);
+  }
+
+  useEffect(() => {
+    if (timeLeft === "00:00") {
+      clearInterval(timer);
+      document.getElementById("beep").play();
+      if (changeToBreak) {
+        changeTimer(breakLength, "Break");
+      } else {
+        changeTimer(sessionLength, "Session");
+      }
+    }
+  }, [timeLeft]);
+
   function stopRunning() {
     clearInterval(timer);
     setRunning(false);
@@ -70,7 +100,7 @@ function PomodoroClock() {
         </div>
         <button
           id="break-decrement"
-          onClick={breakLength > 0 ? breakDecrement : null}
+          onClick={breakLength > 1 ? breakDecrement : null}
         >
           Dec
         </button>
@@ -88,7 +118,7 @@ function PomodoroClock() {
         </div>
         <button
           id="session-decrement"
-          onClick={sessionLength > 0 ? sessionDecrement : null}
+          onClick={sessionLength > 1 ? sessionDecrement : null}
         >
           Dec
         </button>
@@ -101,7 +131,7 @@ function PomodoroClock() {
         </button>
       </div>
       <div id="timer">
-        <span id="timer-label">Session</span>
+        <span id="timer-label">{text}</span>
         <br />
         <span id="time-left">{timeLeft}</span>
         <button id="start_stop" onClick={running ? stopRunning : startRunning}>
@@ -110,6 +140,12 @@ function PomodoroClock() {
         <button id="reset" onClick={reset}>
           Reset
         </button>
+        <audio id="beep" preload="auto">
+          <source
+            src="http://soundbible.com/mp3/Intruder%20Alert-SoundBible.com-867759995.mp3"
+            type="audio/mpeg"
+          ></source>
+        </audio>
       </div>
     </div>
   );
