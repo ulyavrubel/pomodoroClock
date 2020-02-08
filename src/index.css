@@ -1,13 +1,234 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  background-color: rgb(24, 24, 24);
+  color: white;
+  font-family: "Montserrat", sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+#root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  align-self: start;
+  color: rgb(129, 127, 127);
+}
+
+footer {
+  padding-top: 20vh;
+  color: rgb(129, 127, 127);
+}
+h5 a {
+  text-decoration: none;
+  color: rgb(189, 187, 187);
+}
+
+#clock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80vh;
+  height: 80vh;
+  justify-self: center;
+}
+
+/* #inside-circle {
+  margin-top: -30vh;
+} */
+
+#controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 80vw;
+  margin-top: -55vh;
+  font-size: 1em;
+}
+
+.session-break {
+  display: grid;
+  grid-template-columns: repeat(3, auto-fit);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.session-break-label {
+  grid-column: 1/4;
+  align-self: end;
+  justify-self: center;
+  padding-bottom: 7px;
+}
+
+.session-break-length {
+  justify-self: center;
+  font-family: "Source Code Pro", monospace;
+  font-size: 1.3em;
+}
+
+.decrement {
+  width: 30px;
+  height: 30px;
+  background-image: url(./pic/previous.png);
+  background-position: center;
+  background-size: cover;
+  justify-self: center;
+}
+
+.increment {
+  width: 30px;
+  height: 30px;
+  background-image: url(./pic/next.png);
+  background-position: center;
+  background-size: cover;
+  justify-self: center;
+}
+
+.start {
+  margin-top: 3vh;
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  background-image: url(./pic/play.png);
+  background-position: center;
+  background-size: cover;
+}
+
+.pause {
+  margin-top: 3vh;
+  margin-right: 5px;
+  width: 40px;
+  height: 40px;
+  background-image: url(./pic/pause.png);
+  background-position: center;
+  background-size: cover;
+}
+
+#reset {
+  margin-top: 3vh;
+  margin-left: 5px;
+  width: 40px;
+  height: 40px;
+  background-image: url(./pic/replay.png);
+  background-position: center;
+  background-size: cover;
+}
+
+#inside-circle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#inside-circle-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+#timer-label {
+  font-size: 2em;
+}
+
+#time-left {
+  font-family: "Source Code Pro", monospace;
+  font-size: 6em;
+}
+
+/* @media (max-width: 1000px) {
+  #timer {
+    width: 60vw;
+    height: 60vw;
+  }
+
+  #controls {
+    flex-direction: column;
+    margin-top: -85vh;
+    font-size: 1em;
+    align-items: center;
+  }
+  
+
+  .session-break {
+    grid-template-columns: 40px 140px 40px;
+  }
+  #session {
+    margin-bottom: 15px;
+  }
+  #inside-circle {
+    margin-top: 20vh;
+  }
+  #break {
+    margin-top: 25vh;
+  }
+} */
+
+@media (max-width: 1000px) {
+  header {
+    margin-bottom: 80px;
+  }
+  #timer {
+    width: 60vw;
+    height: 60vw;
+  }
+  #clock {
+    position: relative;
+  }
+
+  #controls {
+    position: absolute;
+    flex-direction: column;
+    margin-top: 1vh;
+    font-size: 1em;
+    align-items: center;
+  }
+  .session-break {
+    grid-template-columns: 40px 80px 40px;
+  }
+
+  #session {
+    margin-bottom: 8vh;
+  }
+  #inside-circle {
+    margin-top: 1vh;
+  }
+  #break {
+    margin-top: 8vh;
+  }
+  #timer-label {
+    font-size: 1.5em;
+  }
+
+  #time-left {
+    font-family: "Source Code Pro", monospace;
+    font-size: 3em;
+  }
+
+  .start,
+  .pause,
+  #reset {
+    width: 30px;
+    height: 30px;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.5em;
+  }
+  #timer {
+    width: 70vw;
+    height: 70vw;
+  }
 }
